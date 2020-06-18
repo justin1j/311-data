@@ -3,6 +3,9 @@ name: Daily_Update_Backend_Dev
 on:
   schedule:
     - cron: '0 0 * * *'
+  push:
+    branches:
+      - aws-fix
 
 jobs:
   build:
@@ -14,6 +17,7 @@ jobs:
           username: ec2-user
           host: ${{ secrets.AWS_DEV_HOST }}
           key: ${{ secrets.AWS_DEV_PRIVATE_KEY }}
+          command_timeout: 30m
           script: |
             set -e
             cd 311-data/server
